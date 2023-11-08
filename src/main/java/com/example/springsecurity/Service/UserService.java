@@ -10,9 +10,10 @@ public interface UserService {
 
 public UserDetails loadUserByUsername(String username);
 
-public User addUser(String username, String password);
+public User addUser(User user);
 
 public List<User> getAllUsers();
 public boolean isPresent(String username);
+
 
 }

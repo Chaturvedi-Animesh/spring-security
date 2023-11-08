@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import com.example.springsecurity.Service.UserService;
 
 @RestController
 @RequestMapping("/home")
+@PreAuthorize("hasRole('SUPER')")
 public class UserController {
 
     @Autowired
@@ -26,8 +28,7 @@ public class UserController {
         if (service.isPresent(user.getUsername())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username Already Exists");
         } else {
-            User newUser = service.addUser(user.getUsername(), user.getPassword());
-            return ResponseEntity.ok(newUser);
+            return ResponseEntity.ok(service.addUser(user));
         }
     }
 
@@ -35,5 +36,7 @@ public class UserController {
     public List<User> getAllUser() {
         return service.getAllUsers();
     }
+
+
 
 }

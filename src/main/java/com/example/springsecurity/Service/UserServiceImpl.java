@@ -32,14 +32,15 @@ public class UserServiceImpl implements UserService,UserDetailsService{
         return org.springframework.security.core.userdetails.User.builder()
         .username(user.getUsername())
         .password(user.getPassword())
+        .roles(user.getRoles())
         .build();
     }
 
+
     @Override
-    public User addUser(String username, String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
+    public User addUser(User user) {
+        
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return repo.save(user);
     }
@@ -54,6 +55,9 @@ public class UserServiceImpl implements UserService,UserDetailsService{
         if(user == null) return false;
         return true;
     }
+
+
+    
 
     
     

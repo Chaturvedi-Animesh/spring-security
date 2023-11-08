@@ -3,6 +3,7 @@ package com.example.springsecurity.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 // TODO role based auth
 //TODO JWT
-@EnableWebSecurity
+
 @Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Autowired
@@ -25,10 +28,8 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoder encoder;
 
-
-
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(customUserService);
         provider.setPasswordEncoder(encoder);

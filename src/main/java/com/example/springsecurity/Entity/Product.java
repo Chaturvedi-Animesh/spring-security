@@ -1,6 +1,5 @@
 package com.example.springsecurity.Entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,18 +16,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class User {
-
+public class Product {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
-
-    @Column(unique = true)
-    private String username;
-    private String password;
-
-    
-    private String roles;
-
-    
+    private long id;
+    private String name;
+    private double price;
+    private long quantity;
 }
