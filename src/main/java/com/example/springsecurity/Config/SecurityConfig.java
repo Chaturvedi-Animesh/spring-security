@@ -14,7 +14,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-// TODO role based auth
 //TODO JWT
 
 @Configuration
